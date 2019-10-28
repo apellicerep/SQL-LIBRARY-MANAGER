@@ -4,7 +4,7 @@ const Sequelize = require('sequelize');
 module.exports = (sequelize) => {
     class Book extends Sequelize.Model { }
 
-    Article.init({
+    Book.init({
         title: {
             type: Sequelize.STRING,
             validate: {
@@ -21,7 +21,8 @@ module.exports = (sequelize) => {
                 }
             }
         },
-        body: Sequelize.TEXT
+        genre: Sequelize.STRING,
+        year: Sequelize.STRING
     }, { sequelize });
 
     return Book;
