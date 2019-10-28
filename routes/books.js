@@ -16,12 +16,41 @@ function asyncHandler(cb) {
 /* GET articles listing. */
 router.get('/', asyncHandler(async (req, res) => {
     const books = await Book.findAll();
-    res.render("books/listbooks", { books, title: "Sequelize-It!" });
+    res.render("books/listbooks", { books, title: "Books" });
 }));
 
 /* Create a new article form. */
 router.get('/new', asyncHandler(async (req, res) => {
     res.render("books/newbook", { books: {}, title: "New Book" })
 }));
+
+/* POST create article. */
+router.post('/', asyncHandler(async (req, res) => {
+    let book;
+    try {
+        book = await Book.create(req.body);
+        console.log(book)
+        res.redirect("/books/");
+    } catch (error) {
+        if (error.name === "SequelizeValidationError") {
+            book = await Book.build(req.body);
+            console.log(error.errors)
+            res.render("books/newbook", { book, errors: error.errors, title: "New Book" })
+        } else {
+            throw error;
+        }
+    }
+}));
+
+router.get("/:id/edit", asyncHandler(async (req, res) => {
+    const book = await Book.findByPk(req.params.id);
+    if (book) {
+        res.render("books/newbook", { book, title: "Edit Book" })
+    } else {
+        res.sendStatus(404);
+    }
+}))
+
+
 
 module.exports = router;
