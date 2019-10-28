@@ -19,4 +19,9 @@ router.get('/', asyncHandler(async (req, res) => {
     res.render("books/listbooks", { books, title: "Sequelize-It!" });
 }));
 
+/* Create a new article form. */
+router.get('/new', asyncHandler(async (req, res) => {
+    res.render("books/newbook", { books: {}, title: "New Book" })
+}));
+
 module.exports = router;
