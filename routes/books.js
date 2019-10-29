@@ -92,7 +92,7 @@ router.get('/results', asyncHandler(async (req, res) => {
         }
     })
     if (books) {
-        res.render("books/listbooks", { books, title: "Books" });
+        res.render("books/listbooks", { books, title: "Books", results: "results" });
     } else {
         res.status(404);
         res.render('pageNotFound');

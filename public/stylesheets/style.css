@@ -135,5 +135,9 @@ form.test2 button:hover {
   background: #01b189;
 }
 
+form.delete input[type=submit]{
+  background-color: red;
+}
+
 
 

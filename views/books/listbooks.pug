@@ -25,4 +25,7 @@ block content
           td #{book.author}
           td #{book.genre}
           td #{book.year}
+  if (results == "results")
+    p
+    a.button(href='/books/') Back
   include pagination
