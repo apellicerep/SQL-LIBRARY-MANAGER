@@ -21,7 +21,7 @@ router.get('/', asyncHandler(async (req, res) => {
 
 /* Create a new article form. */
 router.get('/new', asyncHandler(async (req, res) => {
-    res.render("books/newbook", { books: {}, title: "New Book" })
+    res.render("books/newbook", { book: {}, title: "New Book", button: "New Book" })
 }));
 
 /* POST create article. */
@@ -35,22 +35,55 @@ router.post('/', asyncHandler(async (req, res) => {
         if (error.name === "SequelizeValidationError") {
             book = await Book.build(req.body);
             console.log(error.errors)
-            res.render("books/newbook", { book, errors: error.errors, title: "New Book" })
+            res.render("books/newbook", { book, errors: error.errors, title: "New Book", button: "Create New Book" })
         } else {
             throw error;
         }
     }
 }));
 
-router.get("/:id/edit", asyncHandler(async (req, res) => {
+/* Edit article form. */
+router.get("/:id", asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
-        res.render("books/newbook", { book, title: "Edit Book" })
+        res.render("books/editbook", { book, title: "Edit Book", button: "Update Book" })
     } else {
         res.sendStatus(404);
     }
 }))
 
+
+/* Update an article. */
+router.post('/:id', asyncHandler(async (req, res) => {
+    let book;
+    try {
+        book = await Book.findByPk(req.params.id);
+        if (book) {
+            await book.update(req.body);
+            res.redirect("/books/");
+        } else {
+            res.sendStatus(404);
+        }
+    } catch (error) {
+        if (error.name === "SequelizeValidationError") {
+            book = await Book.build(req.body);
+            book.id = req.params.id;
+            res.render("books/newbook", { book, errors: error.errors, title: "Edit Book", button: "Update Book" })
+        } else {
+            throw error;
+        }
+    }
+}));
+
+router.post('/:id/delete', asyncHandler(async (req, res) => {
+    const book = await Book.findByPk(req.params.id);
+    if (book) {
+        await book.destroy();
+        res.redirect("/books/");
+    } else {
+        res.sendStatus(404);
+    }
+}));
 
 
 module.exports = router;

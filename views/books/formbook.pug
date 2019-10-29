@@ -11,6 +11,6 @@ p
     label(for='year') Year
     input#year(name='year' type='text' value=book.year)
 p
-    input(type='submit' value='Create New Book')
+    input(type='submit' value=`${button}`)
 p
-    a.button(href='all_books.html') Cancel
+    a.button(href='/books/') Cancel

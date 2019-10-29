@@ -5,7 +5,6 @@ block content
   
   include errors
   
-  form(action="/books/", method="post")
+  form(action="/books/" + book.id , method="post")
     include formbook
-
-
+  include deletebook
