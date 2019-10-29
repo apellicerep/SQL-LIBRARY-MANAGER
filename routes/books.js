@@ -8,7 +8,7 @@ function asyncHandler(cb) {
         try {
             await cb(req, res, next)
         } catch (error) {
-            res.status(500).send(error);
+            res.status(500).render('error');
         }
     }
 }
@@ -48,7 +48,8 @@ router.get("/:id", asyncHandler(async (req, res) => {
     if (book) {
         res.render("books/editbook", { book, title: "Edit Book", button: "Update Book" })
     } else {
-        res.sendStatus(404);
+        res.status(404);
+        res.render('pageNotFound');
     }
 }))
 
@@ -62,7 +63,8 @@ router.post('/:id', asyncHandler(async (req, res) => {
             await book.update(req.body);
             res.redirect("/books/");
         } else {
-            res.sendStatus(404);
+            res.status(404);
+            res.render('pageNotFound');
         }
     } catch (error) {
         if (error.name === "SequelizeValidationError") {
@@ -81,7 +83,8 @@ router.post('/:id/delete', asyncHandler(async (req, res) => {
         await book.destroy();
         res.redirect("/books/");
     } else {
-        res.sendStatus(404);
+        res.status(404);
+        res.render('pageNotFound');
     }
 }));
 
