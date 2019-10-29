@@ -1,9 +1,7 @@
+
 .pagination
-  a(href='#') &laquo;
-  a(href='#') 1
-  a.active(href='#') 2
-  a(href='#') 3
-  a(href='#') 4
-  a(href='#') 5
-  a(href='#') 6
-  a(href='#') &raquo;
+  - for (var x = 1; x < pagination +1 ; x++)
+    if(x==active)
+      a.active(href=`/books/page?page=${x}`)= x
+    else
+      a(href=`/books/page?page=${x}`)= x

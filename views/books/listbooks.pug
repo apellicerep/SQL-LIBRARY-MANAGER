@@ -2,8 +2,14 @@ extends ../layout
 
 block content
   h1 #{title}
-  p
-    a.button(href='/books/new') Create New Book
+  div.test
+    p
+      a.button(href='/books/new') Create New Book
+
+    form.test2(action='/books/results')
+      input(type='search' name='search')
+      button(type='submit') Search
+
   table
     thead
       tr

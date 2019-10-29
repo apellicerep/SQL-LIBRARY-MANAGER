@@ -113,3 +113,27 @@ input[type=text] {
 }
 
 .pagination a:hover:not(.active) {background-color: #ddd;}
+
+form.test2 input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  background: #f1f1f1;
+}
+
+form.test2 button {
+  padding: 10px;
+  background: #019875;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+}
+
+form.test2 button:hover {
+  background: #01b189;
+}
+
+
+
