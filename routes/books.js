@@ -17,15 +17,6 @@ function asyncHandler(cb) {
 }
 
 
-// /* GET articles listing. */
-// router.get('/', asyncHandler(async (req, res) => {
-//     const books = await Book.findAll();
-//     //const numPagination = books.count;
-//     //console.log(books.row)
-//     res.render("books/listbooks", { books: books, title: "Books", pagination: 1 });
-// }));
-
-
 /* Pagination */
 router.get('/', asyncHandler(async (req, res) => {
     const books = await Book.findAndCountAll(
@@ -40,12 +31,12 @@ router.get('/', asyncHandler(async (req, res) => {
 }))
 
 
-/* Create a new article form. */
+/* Create a new book form. */
 router.get('/new', asyncHandler(async (req, res) => {
     res.render("books/newbook", { book: {}, title: "New Book", button: "New Book" })
 }));
 
-/* POST create article. */
+/* POST create book. */
 router.post('/', asyncHandler(async (req, res) => {
     let book;
     try {
@@ -101,7 +92,7 @@ router.get('/results', asyncHandler(async (req, res) => {
 
 
 
-/* Edit article form. */
+/* Edit book form. */
 router.get("/:id", asyncHandler(async (req, res) => {
     const book = await Book.findByPk(req.params.id);
     if (book) {
@@ -113,7 +104,7 @@ router.get("/:id", asyncHandler(async (req, res) => {
 }))
 
 
-/* Update an article. */
+/* Update an book. */
 router.post('/:id', asyncHandler(async (req, res) => {
     let book;
     try {
