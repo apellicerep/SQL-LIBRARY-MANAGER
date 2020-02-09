@@ -7,3 +7,5 @@ Given HTML designs and an existing SQLite database. I have implemented a dynamic
 * Pagination 
 * Search field. 
 
+![.](https://github.com/apellicerep/SQL-LIBRARY-MANAGER/blob/master/expressSqlbooksgif.gif)
+
